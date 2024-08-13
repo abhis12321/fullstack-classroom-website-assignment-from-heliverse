@@ -1,18 +1,20 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import UserRegister from './UserRegistration';
+import { useAuth } from './AuthProvider';
 
 export default function UserLogin() {
     const [option, setOption] = useState(0);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const USER = useAuth();
 
     const handleLogin = e => {
         e.preventDefault();
         const body = { email, password };
         axios.put("/api/user" , body)
             .then(result => result.data)
-            .then(data => console.log(data))
+            .then(data => (data.success && USER.login(data.user)) | alert(data.message))
             .catch(error => console.log(error.message))
     }
 

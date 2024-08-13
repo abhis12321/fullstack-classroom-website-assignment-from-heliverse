@@ -6,7 +6,7 @@ export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("ecommerse-user"));
+    const data = JSON.parse(localStorage.getItem("classroom-management-user"));
     data && setUser(data);
   }, []);
 
