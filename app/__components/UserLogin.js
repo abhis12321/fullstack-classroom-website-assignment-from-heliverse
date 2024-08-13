@@ -10,7 +10,10 @@ export default function UserLogin() {
     const handleLogin = e => {
         e.preventDefault();
         const body = { email, password };
-        console.log(body);
+        axios.put("/api/user" , body)
+            .then(result => result.data)
+            .then(data => console.log(data))
+            .catch(error => console.log(error.message))
     }
 
 
