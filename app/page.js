@@ -1,13 +1,11 @@
 "use client"
-import React from 'react'
-import UserRegister from './__components/UserRegistration';
+import React, { useState } from 'react'
+import UserLogin from './__components/UserLogin';
 
 export default function page() {
-  const [option , setOption] = React.useState(0);
   return (
     <div className=''>
-      fullstack classroome website
-      <UserRegister setOption={setOption} />
+      <UserLogin/>
     </div>
   )
 }
