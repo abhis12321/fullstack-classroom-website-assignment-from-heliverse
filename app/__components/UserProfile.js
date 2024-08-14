@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import { useAuth } from './AuthProvider';
 import UserRegistration from './UserRegistration';
 import ClassRoomForm from './ClassRoomForm';
@@ -30,7 +29,7 @@ export default function UserProfile({ option, setOption }) {
             {
                 option === 1 ? <UserRegistration setOption={setOption} userRole={option === 1 ? "teacher" : "student"} />
                 :
-                option === 5 && <ClassRoomForm />
+                option === 5 && <ClassRoomForm setOption={setOption}/>
             }
         </div>
     )

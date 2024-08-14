@@ -1,9 +1,10 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 
-export default function ClassRoomForm() {
+export default function ClassRoomForm({ setOption }) {
     const [classroom, setClassroom] = useState('');
-    const [name, setName] = useState();
-    const [email, setEmail] = useState();
+    const [teacherName, setName] = useState();
+    const [teacherEmail, setEmail] = useState();
     const [timeTable, setTimeTable] = useState([
         { day: "Sunday", start: "10AM", end: "5PM" },
         { day: "Monday", start: "10AM", end: "5PM" },
@@ -22,7 +23,11 @@ export default function ClassRoomForm() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        const body = { classroom, name, email, timeTable };
+        const body = { classroom, teacherName, teacherEmail, timeTable };
+        axios.post("/api/classroom" , body)
+            .then(res => res.data)
+            .then(data => console.log(data))
+            .catch(error => console.log(error.message));
     }
 
 
@@ -34,9 +39,9 @@ export default function ClassRoomForm() {
                 </div>
                 <input name='classroom' type="text" value={classroom} onChange={e => setClassroom(e.target.value)} className='w-[98%] max-w-[600px] outline-none invalid:text-pink-600 font-semibold hover:bg-violet-800/20 placeholder:text-gray-500 shadow-[0_0_10px_gray_inset] focus:shadow-[0_0_15px_brown_inset] py-2 px-3 rounded-md mx-auto text-center' placeholder="enter classroom name" required />
 
-                <input name='name' type="text" value={name} onChange={e => setName(e.target.value)} className='w-[98%] max-w-[600px] outline-none invalid:text-pink-600 font-semibold hover:bg-violet-800/20 placeholder:text-gray-500 shadow-[0_0_10px_gray_inset] focus:shadow-[0_0_15px_brown_inset] py-2 px-3 rounded-md mx-auto text-center' placeholder="teacher's name" required />
+                <input name='name' type="text" value={teacherName} onChange={e => setName(e.target.value)} className='w-[98%] max-w-[600px] outline-none invalid:text-pink-600 font-semibold hover:bg-violet-800/20 placeholder:text-gray-500 shadow-[0_0_10px_gray_inset] focus:shadow-[0_0_15px_brown_inset] py-2 px-3 rounded-md mx-auto text-center' placeholder="teacher's name" required />
 
-                <input name='t-email' type="email" value={email} onChange={e => setEmail(e.target.value)} className='w-[98%] max-w-[600px] outline-none invalid:text-pink-600 font-semibold hover:bg-violet-800/20 placeholder:text-gray-500 shadow-[0_0_10px_gray_inset] focus:shadow-[0_0_15px_brown_inset] py-2 px-3 rounded-md mx-auto text-center' placeholder="teacher's email" required />
+                <input name='t-email' type="email" value={teacherEmail} onChange={e => setEmail(e.target.value)} className='w-[98%] max-w-[600px] outline-none invalid:text-pink-600 font-semibold hover:bg-violet-800/20 placeholder:text-gray-500 shadow-[0_0_10px_gray_inset] focus:shadow-[0_0_15px_brown_inset] py-2 px-3 rounded-md mx-auto text-center' placeholder="teacher's email" required />
 
                 {
                     timeTable.map((data, index) =>
@@ -49,8 +54,8 @@ export default function ClassRoomForm() {
                 }
 
                 <div className="flex w-[98%] items-center justify-between gap[2px] border-[2px] border-cyan-500 rounded-lg overflow-hidden">
-                    {/* <div className="w-[50%] text-white/80 bg-orange-900 hover:bg-orange-700 active:bg-violet-900 p-2 text-center outline-none font-semibold cursor-pointer border-r-[2px] border-cyan-500" onClick={e => setOption(0)}>cancel</div> */}
-                    <input type="submit" value={'Register'} className='w-[100%] text-white/80 bg-red-800 hover:bg-red-600 active:bg-violet-900 p-2 text-center outline-none font-semibold cursor-pointer' required />
+                    <div className="w-[50%] text-white/80 bg-orange-900 hover:bg-orange-700 active:bg-violet-900 p-2 text-center outline-none font-semibold cursor-pointer border-r-[2px] border-cyan-500" onClick={e => setOption(0)}>cancel</div>
+                    <input type="submit" value={'Register'} className='w-[50%] text-white/80 bg-red-800 hover:bg-red-600 active:bg-violet-900 p-2 text-center outline-none font-semibold cursor-pointer' required />
                 </div>
 
             </form>
