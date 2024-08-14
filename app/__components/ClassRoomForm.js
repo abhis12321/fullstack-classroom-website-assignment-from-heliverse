@@ -26,7 +26,7 @@ export default function ClassRoomForm({ setOption }) {
         const body = { classroom, teacherName, teacherEmail, timeTable };
         axios.post("/api/classroom" , body)
             .then(res => res.data)
-            .then(data => console.log(data))
+            .then(data => alert(data.message) & (data.success && setOption(5)))
             .catch(error => console.log(error.message));
     }
 
@@ -54,7 +54,7 @@ export default function ClassRoomForm({ setOption }) {
                 }
 
                 <div className="flex w-[98%] items-center justify-between gap[2px] border-[2px] border-cyan-500 rounded-lg overflow-hidden">
-                    <div className="w-[50%] text-white/80 bg-orange-900 hover:bg-orange-700 active:bg-violet-900 p-2 text-center outline-none font-semibold cursor-pointer border-r-[2px] border-cyan-500" onClick={e => setOption(0)}>cancel</div>
+                    <div className="w-[50%] text-white/80 bg-orange-900 hover:bg-orange-700 active:bg-violet-900 p-2 text-center outline-none font-semibold cursor-pointer border-r-[2px] border-cyan-500" onClick={e => setOption(5)}>cancel</div>
                     <input type="submit" value={'Register'} className='w-[50%] text-white/80 bg-red-800 hover:bg-red-600 active:bg-violet-900 p-2 text-center outline-none font-semibold cursor-pointer' required />
                 </div>
 
