@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useAuth } from './AuthProvider';
 import UserRegistration from './UserRegistration';
+import ClassRoomForm from './ClassRoomForm';
 
 export default function UserProfile({ option, setOption }) {
     const USER = useAuth();
@@ -16,6 +17,7 @@ export default function UserProfile({ option, setOption }) {
                     {
                         USER.user.userRole != "student" &&
                         <>
+                            <button className={`${USER.user?.userRole !== "principal" && "hidden"} py-[5px] px-6 rounded-lg text-white bg-blue-900 hover:bg-blue-600  text-sm font-semibold`} onClick={() => setOption(5)}>add new class</button>
                             <button className={`${USER.user?.userRole !== "principal" && "hidden"} py-[5px] px-6 rounded-lg text-white bg-blue-900 hover:bg-blue-600  text-sm font-semibold`} onClick={() => setOption(1)}>add new teacher</button>
                             <button className={`py-[5px] px-6 rounded-lg text-white bg-blue-900 hover:bg-blue-600  text-sm font-semibold`} onClick={() => setOption(1)}>add new student</button>
                         </>
@@ -26,7 +28,9 @@ export default function UserProfile({ option, setOption }) {
             </div>
 
             {
-                option !== 0 && <UserRegistration setOption={setOption} userRole={option === 1 ? "teacher" : "student"} />
+                option === 1 ? <UserRegistration setOption={setOption} userRole={option === 1 ? "teacher" : "student"} />
+                :
+                option === 5 && <ClassRoomForm />
             }
         </div>
     )
