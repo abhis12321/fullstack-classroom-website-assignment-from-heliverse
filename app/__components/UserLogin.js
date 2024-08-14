@@ -1,10 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import UserRegister from './UserRegistration';
 import { useAuth } from './AuthProvider';
 
 export default function UserLogin() {
-    const [option, setOption] = useState(0);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const USER = useAuth();
@@ -34,9 +32,6 @@ export default function UserLogin() {
 
                 <button type='submit' className='w-[96%] max-w-[550px] text-center rounded-md bg-red-900/95 py-2 mt-[14px] hover:bg-red-700 font-mono text-white ring-1 focus:ring-2 ring-red-700' >Login</button>
             </form>
-            {
-                option == 1 && <UserRegister setOption={setOption} />
-            }
         </div>
     )
 }
